@@ -1,0 +1,44 @@
+
+--- validators ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- staking ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- tokenDetails: HYPE ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- supply ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- userState: Random ---
+Status: 200
+Body: {"marginSummary":{"accountValue":"31.616532","totalNtlPos":"0.0","totalRawUsd":"31.616532","totalMarginUsed":"0.0"},"crossMarginSummary":{"accountValue":"31.616532","totalNtlPos":"0.0","totalRawUsd":"31.616532","totalMarginUsed":"0.0"},"crossMaintenanceMarginUsed":"0.0","withdrawable":"31.616532","assetPositions":[],"time":1764077095125}
+
+--- validators ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- staking ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- tokenDetails: HYPE ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- supply ---
+Status: 422
+Body: Failed to deserialize the JSON body into the target type
+
+--- userState: Random ---
+Status: 200
+Body: {"marginSummary":{"accountValue":"31.616532","totalNtlPos":"0.0","totalRawUsd":"31.616532","totalMarginUsed":"0.0"},"crossMarginSummary":{"accountValue":"31.616532","totalNtlPos":"0.0","totalRawUsd":"31.616532","totalMarginUsed":"0.0"},"crossMaintenanceMarginUsed":"0.0","withdrawable":"31.616532","assetPositions":[],"time":1764077175807}
+
+--- spotState: AF ---
+Status: 200
+Body: {"balances":[{"coin":"USDC","token":0,"total":"25384.763875","hold":"9999.73708","entryNtl":"0.0"},{"coin":"MEOW","token":61,"total":"193600.310907","hold":"0.0","entryNtl":"11.1513779"},{"coin":"PEAR","token":71,"total":"20199.817368","hold":"0.0","entryNtl":"2.01998173"},{"coin":"NEIRO","token":78,"total":"44835.08891","hold":"0.0","entryNtl":"4.53731099"},{"coin":"BERA","token":80,"total":"7253.90761","hold":"0.0","entryNtl":"7.16323376"},{"coin":"WOW","token":98,"total":"57728.41925","hold":"0.0","entryNtl":"5.77284192"},{"coin":"VAULT","token":106,"total":"8757.30020193","hold":"0.0","entryNtl":"8.7573002"},{"coin":"MUNCH","token":146,"total":"910220.59144","hold":"0.0","entryNtl":"3.36781618"},{"coin":"HYPE","token":150,"total":"35934429.8400000036","hold":"0.0","entryNtl":"837579781.4088776112"},{"coin":"STAR","token":154,"total":"97843.63812127","hold":"0.0","entryNtl":"9.78436381"},{"coin":"LIQD","token":178,"total":"0.19234809","hold":"0.0","entryNtl":"0.0007767"},{"coin":"USDT0","token":268,"total":"2274.35645161","hold":"0.0","entryNtl":"0.00000001"},{"coin":"USDH","token":360,"total":"10052.05764697","hold":"9999.85518","entryNtl":"8890.23032554"}]}

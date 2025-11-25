@@ -1,0 +1,4 @@
+
+--- AF State ---
+Status: 200
+Body: {"marginSummary":{"accountValue":"1000.007923","totalNtlPos":"0.0","totalRawUsd":"1000.007923","totalMarginUsed":"0.0"},"crossMarginSummary":{"accountValue":"1000.007923","totalNtlPos":"0.0","totalRawUsd":"1000.007923","totalMarginUsed":"0.0"},"crossMaintenanceMarginUsed":"0.0","withdrawable":"1000.007923","assetPositions":[],"time":1764077138019}

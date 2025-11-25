@@ -1,0 +1,45 @@
+{
+    "revenue_data": [
+        {
+            "date": "2025-08-14",
+            "revenue": 5170000,
+            "source": "Binance"
+        },
+        {
+            "date": "2025-08-26",
+            "revenue": 7700000,
+            "source": "Ainvest"
+        },
+        {
+            "date": "2025-09-19",
+            "revenue": 2750000,
+            "source": "MEXC"
+        },
+        {
+            "date": "2025-10-18",
+            "revenue_range": "3,000,000 - 4,000,000",
+            "source": "Medium"
+        },
+        {
+            "date": "2025-11-21",
+            "revenue_range": "3,700,000 - 4,200,000",
+            "source": "DefiLlama"
+        }
+    ],
+    "tokenomics": {
+        "af_fund_allocation": {
+            "percentage": 0.99,
+            "description": "99% of protocol fees go to the Assistance Fund (AF) for HYPE token buybacks.",
+            "mechanism": "Market buybacks to reduce circulating supply."
+        },
+        "dat_enterprise_funds": {
+            "description": "Large-scale institutional funds for Digital Asset Trust (DAT) purchases. These funds are often in a 'waiting' state due to compliance, settlement, and on-chain confirmation processes associated with enterprise-level transactions."
+        },
+        "hip3_staking": {
+            "deployer_stake": 500000,
+            "listing_stake": 500000,
+            "currency": "HYPE",
+            "description": "Deployers must stake 500,000 HYPE to permissionlessly deploy new perpetual contract markets. This stake serves as a security guarantee and is subject to slashing by validators if the market is manipulated or operates poorly."
+        }
+    }
+}
