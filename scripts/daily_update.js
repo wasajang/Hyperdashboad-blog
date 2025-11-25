@@ -3,7 +3,8 @@ const path = require('path');
 
 const scripts = [
     'update_tokenomics.js',
-    'update_revenue.js'
+    'update_revenue.js',
+    'update_metrics.js'
 ];
 
 async function runScript(scriptName) {

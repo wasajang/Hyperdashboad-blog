@@ -130,5 +130,17 @@
       "future_emissions": 419356760,
       "other_non_circulating": 242838769
     }
+  },
+  {
+    "timestamp": "2025-11-25T14:01:52.781Z",
+    "total_supply": 1000000000,
+    "circulating_supply_swpe": 128602998.99000001,
+    "breakdown": {
+      "af_balance": 35937327.01,
+      "hip3_stakes": 1500000,
+      "total_staked": 414602914,
+      "future_emissions": 419356760,
+      "other_non_circulating": 242838769
+    }
   }
 ]
