@@ -4,7 +4,7 @@ import { Hero } from "@/components/ui/Hero";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
-import { TokenomicsDataViz } from "@/components/ui/TokenomicsDataViz";
+import { TokenomicsFlowViz } from "@/components/ui/TokenomicsFlowViz";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Wallet, ArrowLeftRight, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/components/providers/LanguageContext";
@@ -69,7 +69,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Hero />
 
-      <TokenomicsDataViz />
+      <TokenomicsFlowViz />
 
       <Section id="onboarding" className="bg-black">
         <Container>

@@ -7,14 +7,19 @@ const HISTORY_FILE = path.join(__dirname, '../data/tokenomics_history.json');
 const TOTAL_SUPPLY = 1_000_000_000; // 1 Billion HYPE
 const AF_ADDRESS = '0xfefefefefefefefefefefefefefefefefefefefe';
 
-// Default Manual Inputs (Can be overridden by args)
-// Usage: node scripts/update_tokenomics.js <deployer_count> <af_balance_override> <total_staked> <future_emissions> <other_non_circulating>
+// Default Manual Inputs (Based on hypeburn.fun data)
 const DEFAULT_INPUTS = {
     unique_deployer_count: 3,
-    af_balance: null, // Will try to fetch from API
-    total_staked: 414_602_914, // From user request
-    future_emissions: 419_356_760, // User provided
-    other_non_circulating: 242_838_769 // User provided
+    af_balance: null, // Dynamic (Chainstack)
+    // Non-Circulating
+    future_emissions: 419_351_233,
+    non_circulating_other: 242_838_769,
+    // Circulating but Locked/Burned
+    staked: 112_494_680,
+    burned: 700_999, // Static for now
+    // Circulating Components (for reference)
+    hyperevm: 54_521_035,
+    circulating_other: 132_852_350
 };
 
 const CHAINSTACK_INFO_URL = 'https://hyperliquid-mainnet.core.chainstack.com/763da485018ed700a60ff2ae431c1f47/info';
@@ -91,50 +96,31 @@ async function main() {
         const args = process.argv.slice(2);
         const unique_deployer_count = args[0] ? parseInt(args[0]) : DEFAULT_INPUTS.unique_deployer_count;
         let af_balance = args[1] ? parseFloat(args[1]) : DEFAULT_INPUTS.af_balance;
-        const total_staked = args[2] ? parseFloat(args[2]) : DEFAULT_INPUTS.total_staked;
-        const future_emissions = args[3] ? parseFloat(args[3]) : DEFAULT_INPUTS.future_emissions;
-        const other_non_circulating = args[4] ? parseFloat(args[4]) : DEFAULT_INPUTS.other_non_circulating;
 
-        // 2. Fetch from API if not provided in args
+        // 2. Fetch AF from API
         if (af_balance === null || isNaN(af_balance)) {
             const apiBalance = await getAFBalanceFromAPI();
-            if (apiBalance !== null) {
-                af_balance = apiBalance;
-            } else {
-                console.error('Failed to fetch AF balance from API and no manual override provided.');
-                // Fallback to last known good value
-                if (fs.existsSync(HISTORY_FILE)) {
-                    const history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf-8'));
-                    if (history.length > 0) {
-                        af_balance = history[history.length - 1].breakdown.af_balance;
-                        console.log(`Using last known AF balance: ${af_balance}`);
-                    }
-                }
-
-                if (af_balance === null) {
-                    throw new Error('AF Balance is required.');
-                }
-            }
+            af_balance = apiBalance !== null ? apiBalance : 0; // Default to 0 if fail
+            if (apiBalance === null) console.warn("Using 0 for AF Balance due to API failure.");
         }
 
         console.log('\n--- Calculation Inputs ---');
-        console.log(`Unique Deployers: ${unique_deployer_count}`);
         console.log(`AF Balance: ${af_balance.toLocaleString()}`);
-        console.log(`Total Staked: ${total_staked.toLocaleString()}`);
+        console.log(`Future Emissions: ${DEFAULT_INPUTS.future_emissions.toLocaleString()}`);
+        console.log(`Non-Circulating Other: ${DEFAULT_INPUTS.non_circulating_other.toLocaleString()}`);
+        console.log(`Staked: ${DEFAULT_INPUTS.staked.toLocaleString()}`);
+        console.log(`Burned: ${DEFAULT_INPUTS.burned.toLocaleString()}`);
 
         // 3. Calculate HIP3 Stakes
         const hip3_stakes = unique_deployer_count * 500_000;
         console.log(`HIP3 Stakes: ${hip3_stakes.toLocaleString()}`);
 
         // 4. Calculate SWPE Circulating Supply
-        // Note: 'other_non_circulating' (Core/Grants) is likely included in 'total_staked' (Locked tokens can be staked).
-        // To avoid double counting, we do NOT subtract 'other_non_circulating' separately if 'total_staked' is already subtracted.
-        // Formula: Total Supply - AF - HIP3 - Staked - Emissions
+        // Formula: Total Supply - (Non-Circulating + AF + HIP3 + Staked + Burned)
+        const non_circulating_total = DEFAULT_INPUTS.future_emissions + DEFAULT_INPUTS.non_circulating_other;
+        const locked_circulating = af_balance + hip3_stakes + DEFAULT_INPUTS.staked + DEFAULT_INPUTS.burned;
 
-        const non_circulating = af_balance + hip3_stakes + total_staked + future_emissions;
-        // We exclude other_non_circulating from the sum because it overlaps with total_staked.
-
-        const circulating_supply_swpe = TOTAL_SUPPLY - non_circulating;
+        const circulating_supply_swpe = TOTAL_SUPPLY - non_circulating_total - locked_circulating;
 
         console.log(`\n>>> SWPE Circulating Supply: ${circulating_supply_swpe.toLocaleString()} <<<\n`);
 
@@ -146,9 +132,12 @@ async function main() {
             breakdown: {
                 af_balance,
                 hip3_stakes,
-                total_staked,
-                future_emissions,
-                other_non_circulating // We still record it for reference, but don't subtract it
+                staked: DEFAULT_INPUTS.staked,
+                burned: DEFAULT_INPUTS.burned,
+                future_emissions: DEFAULT_INPUTS.future_emissions,
+                non_circulating_other: DEFAULT_INPUTS.non_circulating_other,
+                hyperevm: DEFAULT_INPUTS.hyperevm,
+                circulating_other: DEFAULT_INPUTS.circulating_other
             }
         };
 

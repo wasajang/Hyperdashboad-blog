@@ -6,5 +6,15 @@
     "swpe_supply": 128602998.99000001,
     "daily_revenue": 3623800,
     "swpe_ratio": 3.153852559024263
+  },
+  {
+    "date": "2025-11-26",
+    "timestamp": "2025-11-26T03:02:03.745Z",
+    "price": 34.141,
+    "swpe_supply": 187174222.97,
+    "daily_revenue": 3623800,
+    "swpe_ratio": 4.831313187790286,
+    "coingecko_circulating_supply": 270772999.4341414,
+    "coingecko_price": 34.27
   }
 ]
