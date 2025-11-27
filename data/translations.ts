@@ -15,7 +15,7 @@ export const translations = {
             viewOpportunities: "View Opportunities",
         },
         onboarding: {
-            title: "Start Your Journey",
+            title: "Beginner Onboarding Guide",
             subtitle: "Follow these 4 simple steps to get on-chain.",
             viewFull: "View Full Guide",
             steps: {
@@ -38,7 +38,7 @@ export const translations = {
             },
         },
         opportunities: {
-            title: "Curated Opportunities",
+            title: "Delta Neutral Opportunities",
             subtitle: "Hand-picked on-chain investment strategies by Wasajang.",
             viewAll: "View All Opportunities",
             items: {
@@ -73,7 +73,7 @@ export const translations = {
             viewOpportunities: "기회 보기",
         },
         onboarding: {
-            title: "여정을 시작하세요",
+            title: "왕초보 뉴비 온보딩 가이드",
             subtitle: "온체인으로 가는 4가지 간단한 단계를 따르세요.",
             viewFull: "전체 가이드 보기",
             steps: {
@@ -96,7 +96,7 @@ export const translations = {
             },
         },
         opportunities: {
-            title: "엄선된 기회",
+            title: "Delta Neutral 기회",
             subtitle: "와사장이 직접 고른 온체인 투자 전략입니다.",
             viewAll: "모든 기회 보기",
             items: {

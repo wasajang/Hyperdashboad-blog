@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
+import Image from "next/image";
 import { GraduationCap, ArrowLeftRight, Wallet, ArrowRight } from "lucide-react";
 
 export default function OnboardingPage() {
@@ -42,6 +43,16 @@ export default function OnboardingPage() {
                         <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
                             Master the essentials of the on-chain world. Follow these four steps to go from zero to on-chain native.
                         </p>
+                        <div className="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                            <Image
+                                src="/images/onboarding-hero.png"
+                                alt="Custody vs Non-Custody"
+                                width={1200}
+                                height={675}
+                                className="w-full object-cover"
+                                unoptimized
+                            />
+                        </div>
                     </div>
 
                     <div className="grid gap-8 md:grid-cols-2">

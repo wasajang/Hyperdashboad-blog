@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { TokenomicsFlowViz } from "@/components/ui/TokenomicsFlowViz";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BookOpen, Wallet, ArrowLeftRight, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/components/providers/LanguageContext";
 import { translations } from "@/data/translations";
@@ -71,6 +72,46 @@ export default function Home() {
 
       <TokenomicsFlowViz />
 
+      <Section id="opportunities" className="bg-black/50">
+        <Container>
+          <div className="mb-12 flex items-end justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-white">{t.opportunities.title}</h2>
+              <p className="mt-2 text-gray-400">{t.opportunities.subtitle}</p>
+            </div>
+            <Link href="/opportunities" className="hidden text-sm font-semibold text-primary hover:text-primary/80 sm:block">
+              {t.opportunities.viewAll} <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div className="mb-12 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+            <Image
+              src="/images/delta-neutral-strategy.jpg"
+              alt="Delta Neutral Strategy"
+              width={1200}
+              height={675}
+              className="w-full object-cover"
+              unoptimized
+            />
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredOpportunities.map((opp) => (
+              <Card
+                key={opp.title}
+                {...opp}
+              />
+            ))}
+          </div>
+
+          <div className="mt-8 sm:hidden">
+            <Link href="/opportunities" className="text-sm font-semibold text-primary hover:text-primary/80">
+              {t.opportunities.viewAll} <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
       <Section id="onboarding" className="bg-black">
         <Container>
           <div className="mb-12 flex items-end justify-between">
@@ -81,6 +122,17 @@ export default function Home() {
             <Link href="/onboarding" className="hidden text-sm font-semibold text-primary hover:text-primary/80 sm:block">
               {t.onboarding.viewFull} <span aria-hidden="true">→</span>
             </Link>
+          </div>
+
+          <div className="mb-12 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+            <Image
+              src="/images/onboarding-hero.png"
+              alt="Custody vs Non-Custody"
+              width={1200}
+              height={675}
+              className="w-full object-cover"
+              unoptimized
+            />
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -102,35 +154,6 @@ export default function Home() {
           <div className="mt-8 sm:hidden">
             <Link href="/onboarding" className="text-sm font-semibold text-primary hover:text-primary/80">
               {t.onboarding.viewFull} <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="opportunities" className="bg-black/50">
-        <Container>
-          <div className="mb-12 flex items-end justify-between">
-            <div>
-              <h2 className="text-3xl font-bold text-white">{t.opportunities.title}</h2>
-              <p className="mt-2 text-gray-400">{t.opportunities.subtitle}</p>
-            </div>
-            <Link href="/opportunities" className="hidden text-sm font-semibold text-primary hover:text-primary/80 sm:block">
-              {t.opportunities.viewAll} <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredOpportunities.map((opp) => (
-              <Card
-                key={opp.title}
-                {...opp}
-              />
-            ))}
-          </div>
-
-          <div className="mt-8 sm:hidden">
-            <Link href="/opportunities" className="text-sm font-semibold text-primary hover:text-primary/80">
-              {t.opportunities.viewAll} <span aria-hidden="true">→</span>
             </Link>
           </div>
         </Container>
