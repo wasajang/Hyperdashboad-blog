@@ -1,0 +1,110 @@
+{
+    "exchanges": [
+        {
+            "name": "Bybit",
+            "url": "https://www.bybit.com/en/invite/?ref=6ZWLYB",
+            "code": "6ZWLYB"
+        },
+        {
+            "name": "OKX",
+            "url": "https://www.okx.com/join/7755807",
+            "code": "7755807"
+        },
+        {
+            "name": "Binance",
+            "url": "https://accounts.binance.com/register?ref=108218815",
+            "code": "108218815"
+        },
+        {
+            "name": "Bithumb",
+            "url": "https://m.bithumb.com/react/referral/guide?referral=WASAJANG",
+            "code": "WASAJANG",
+            "note": "가입 기념 5만원 이벤트 중"
+        }
+    ],
+    "wallets": [
+        {
+            "name": "MetaMask Mobile",
+            "url": "https://link.metamask.io/rewards?referral=Q8BD05",
+            "code": "Q8BD05"
+        },
+        {
+            "name": "MetaMask PC",
+            "url": "https://metamask.io/ko/download"
+        },
+        {
+            "name": "Rabby",
+            "url": "https://rabby.io/"
+        },
+        {
+            "name": "Phantom",
+            "url": "https://phantom.com/download"
+        }
+    ],
+    "dapps": [
+        {
+            "name": "Hyperliquid",
+            "url": "https://app.hyperliquid.xyz/join/WASAJANG",
+            "code": "WASAJANG"
+        },
+        {
+            "name": "Based",
+            "url": "https://app.based.one/r/WASAJANG",
+            "code": "WASAJANG"
+        },
+        {
+            "name": "Tread",
+            "url": "https://app.tread.fi/referral/0SKI4UJ9",
+            "code": "0SKI4UJ9"
+        },
+        {
+            "name": "Lighter",
+            "url": "app.lighter.xyz/?referral=WASAJANG",
+            "code": "WASAJANG"
+        },
+        {
+            "name": "EdgeX",
+            "url": "https://pro.edgex.exchange/referral/WASAJANG",
+            "code": "WASAJANG"
+        },
+        {
+            "name": "Pacifica",
+            "url": "https://app.pacifica.fi?referral=wasajang",
+            "code": "wasajang"
+        }
+    ],
+    "access_codes": {
+        "pacifica": [
+            "ZXM84PW2PVSSSSSZ",
+            "MANBVZJT2BF8B84N",
+            "30A8EVQEEEWS1FAJ",
+            "A8HE497T7R8A83JF",
+            "AAPPW01X1SDB7633",
+            "VQ0T9BP3MDF79WRR",
+            "66SHEA81XPF5JN8C",
+            "VTZ8RJ530AN0RPYC",
+            "59YX7NVM0NV1MG0J",
+            "QS5NKNH3579ZND4M",
+            "G8EV3QNM8HJG9SKX",
+            "KR536NMKSMKD59T2",
+            "VPEPG29S9FZ6XRV6",
+            "2NNWB1BJ8FVKMS5W",
+            "CAG8NT1AWEEK9KNE",
+            "S5KJYY6WB2S6RZVX",
+            "77S322M84EHTVMWQ",
+            "MF73GZJ2THVPWZJ2",
+            "DK7X5V73QYNZJ8D8",
+            "GPD49MCC98G5SVJ9",
+            "ZR88K6DDJZZPCH9Y",
+            "M6M1NTXHN98RF070",
+            "4FC4F5Q57ME5DGB2",
+            "62MZDJ8FEWEDQEEM",
+            "YNDQTG7GBCE5J8C3",
+            "SCQKN6XYZYY5XE75",
+            "411KXF6T4RMVKX5C",
+            "AJYZRABY1FY87E7M",
+            "RMMGSV7Q6JHH0ZRN",
+            "DHZ7N45T6E6E6DN7"
+        ]
+    }
+}

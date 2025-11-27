@@ -157,5 +157,20 @@
       "hyperevm": 54521035,
       "circulating_other": 132852350
     }
+  },
+  {
+    "timestamp": "2025-11-27T06:27:12.925Z",
+    "total_supply": 1000000000,
+    "circulating_supply_swpe": 187067268.04,
+    "breakdown": {
+      "af_balance": 36047050.96,
+      "hip3_stakes": 1500000,
+      "staked": 112494680,
+      "burned": 700999,
+      "future_emissions": 419351233,
+      "non_circulating_other": 242838769,
+      "hyperevm": 54521035,
+      "circulating_other": 132852350
+    }
   }
 ]
