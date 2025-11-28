@@ -7,8 +7,8 @@
         },
         {
             "name": "OKX",
-            "url": "https://www.okx.com/join/7755807",
-            "code": "7755807"
+            "url": "https://www.okx.com/join/wasajang",
+            "code": "wasajang"
         },
         {
             "name": "Binance",
@@ -20,6 +20,16 @@
             "url": "https://m.bithumb.com/react/referral/guide?referral=WASAJANG",
             "code": "WASAJANG",
             "note": "가입 기념 5만원 이벤트 중"
+        },
+        {
+            "name": "Coinone",
+            "url": "https://coinone.co.kr/user/signup?ref=Q300JBPX",
+            "code": "Q300JBPX"
+        },
+        {
+            "name": "Coinbase",
+            "url": "https://coinbase.com/join/C3PK9CN?src=referral-link",
+            "code": "C3PK9CN"
         }
     ],
     "wallets": [

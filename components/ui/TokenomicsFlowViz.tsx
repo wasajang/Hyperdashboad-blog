@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { ASSETS } from "@/data/constants";
 
 // --- Types ---
 interface TokenomicsData {
@@ -144,22 +145,22 @@ export function TokenomicsFlowViz() {
             }
         };
 
-        tankHex.src = "/images/tank_hex.png";
+        tankHex.src = ASSETS.TOKENOMICS.TANK_HEX;
         tankHex.onload = checkLoaded;
 
-        tankRoundBands.src = "/images/tank_round_bands.png";
+        tankRoundBands.src = ASSETS.TOKENOMICS.TANK_ROUND_BANDS;
         tankRoundBands.onload = checkLoaded;
 
-        tankRoundGauge.src = "/images/tank_round_gauge.png";
+        tankRoundGauge.src = ASSETS.TOKENOMICS.TANK_ROUND_GAUGE;
         tankRoundGauge.onload = checkLoaded;
 
-        catPump.src = "/images/cat_pump.png";
+        catPump.src = ASSETS.TOKENOMICS.CAT_PUMP;
         catPump.onload = checkLoaded;
 
-        liquidTex.src = "/images/liquid_texture.png";
+        liquidTex.src = ASSETS.TOKENOMICS.LIQUID_TEX;
         liquidTex.onload = checkLoaded;
 
-        pipeLocked.src = "/images/pipe_locked.png";
+        pipeLocked.src = ASSETS.TOKENOMICS.PIPE_LOCKED;
         pipeLocked.onload = checkLoaded;
     }, []);
 
