@@ -1,10 +1,16 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import Image from "next/image";
-import { GraduationCap, ArrowLeftRight, Wallet, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { GraduationCap, ArrowLeftRight, Wallet, ArrowRight, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageContext";
 
 export default function OnboardingPage() {
+    const { language } = useLanguage();
+
     const steps = [
         {
             title: "1. Concept",
@@ -36,6 +42,14 @@ export default function OnboardingPage() {
         <div className="min-h-screen bg-black">
             <Section>
                 <Container>
+                    <Link
+                        href="/"
+                        className="mb-8 inline-flex items-center text-sm text-gray-400 hover:text-primary transition-colors"
+                    >
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        {language === 'ko' ? "홈으로 돌아가기" : "Back to Home"}
+                    </Link>
+
                     <div className="mb-16 text-center">
                         <h1 className="text-4xl font-bold text-white sm:text-5xl">
                             Onboarding <span className="text-primary">Guide</span>

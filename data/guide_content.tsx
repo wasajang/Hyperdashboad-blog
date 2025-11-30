@@ -1,5 +1,8 @@
 import React from 'react';
 import { ExchangeFlowViz } from '@/components/ui/ExchangeFlowViz';
+import { ExchangeToWalletViz, WalletSecurityViz } from '@/components/onboarding/WalletVisualizations';
+import { WalletShowcase } from '@/components/onboarding/WalletShowcase';
+import { WalletCreationFlowViz } from '@/components/onboarding/WalletCreationFlowViz';
 
 export const getGuideContent = (language: 'en' | 'ko') => {
     const isKo = language === 'ko';
@@ -226,16 +229,138 @@ export const getGuideContent = (language: 'en' | 'ko') => {
             title: isKo ? "3. 지갑: 디지털 금고" : "3. Wallet: Your Digital Vault",
             content: (
                 <>
-                    <p className="mb-6 text-lg text-gray-300">
-                        {isKo ? "Web3 지갑은 온체인 세상에서의 신원 증명이자 은행 계좌입니다. 거래를 승인할 수 있는 개인 키를 저장합니다." : "A Web3 wallet is your identity and bank account in the on-chain world. It stores your private keys, which allow you to approve transactions."}
-                    </p>
-                    <h3 className="text-2xl font-bold text-white mb-4">{isKo ? "메타마스크 설정하기" : "Setting Up MetaMask"}</h3>
-                    <ol className="list-decimal pl-6 space-y-4 text-gray-300 mb-6">
-                        <li>{isKo ? <><a href="https://metamask.io" target="_blank" className="text-primary hover:underline">metamask.io</a>에서 브라우저 확장 프로그램을 다운로드하세요.</> : <>Download the browser extension from <a href="https://metamask.io" target="_blank" className="text-primary hover:underline">metamask.io</a>.</>}</li>
-                        <li>{isKo ? "\"새 지갑 생성\"을 클릭하세요." : "Click \"Create a new wallet\"."}</li>
-                        <li><strong>{isKo ? "중요:" : "IMPORTANT:"}</strong> {isKo ? "비밀 복구 구문(12단어)을 종이에 적어두세요. 절대 누구와도 공유하거나 지갑 외의 웹사이트에 입력하지 마세요." : "Write down your Secret Recovery Phrase (12 words) on paper. NEVER share this with anyone or type it into a website other than your wallet."}</li>
-                        <li>{isKo ? "구문을 확인하여 설정을 완료하세요." : "Confirm your phrase to finish setup."}</li>
-                    </ol>
+                    {/* Intro: CEX to Wallet */}
+                    <div className="mb-12">
+                        <h3 className="text-2xl font-bold text-white mb-4">
+                            {isKo ? "거래소에서 개인 지갑으로" : "From Exchange to Personal Wallet"}
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-8 items-center mb-6">
+                            <div>
+                                <p className="text-lg text-gray-300 mb-4">
+                                    {isKo ? (
+                                        <>
+                                            중앙화 거래소(CEX)는 편리하지만, 자산의 진정한 소유권은 거래소에 있습니다. 진정한 '내 돈'이 되려면 <strong>개인 지갑(Personal Wallet)</strong>으로 옮겨야 합니다.
+                                        </>
+                                    ) : (
+                                        <>
+                                            Centralized Exchanges (CEX) are convenient, but the exchange holds the real ownership. To truly make it "your money," you must move it to a <strong>Personal Wallet</strong>.
+                                        </>
+                                    )}
+                                </p>
+                                <div className="text-gray-300 mb-4">
+                                    {isKo ? "대표적인 지갑들을 소개합니다:" : "Here are the leading wallets:"}
+                                </div>
+                            </div>
+                            <div className="relative aspect-video rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-black/50">
+                                <ExchangeToWalletViz />
+                            </div>
+                        </div>
+
+                        {/* Wallet Showcase */}
+                        <div className="mt-8">
+                            <WalletShowcase />
+                        </div>
+                    </div>
+
+                    {/* Core Concept: Private Key */}
+                    <div className="mb-12">
+                        <h3 className="text-2xl font-bold text-amber-400 mb-4">
+                            {isKo ? "핵심은 '개인 키'입니다" : "The Core is the 'Private Key'"}
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-8 items-center mb-6">
+                            <div className="order-2 md:order-1 relative aspect-video rounded-xl overflow-hidden border border-amber-500/20 shadow-[0_0_30px_rgba(245,158,11,0.2)] bg-black/50">
+                                <WalletSecurityViz />
+                            </div>
+                            <div className="order-1 md:order-2">
+                                <p className="text-lg text-gray-300 mb-4">
+                                    {isKo ? (
+                                        <>
+                                            지갑 앱(메타마스크 등)은 단지 <strong>껍데기</strong>일 뿐입니다. 본질은 <strong>니모닉(시드 문구)</strong>과 <strong>개인 키(Private Key)</strong>입니다.
+                                        </>
+                                    ) : (
+                                        <>
+                                            The wallet app (like MetaMask) is just a <strong>shell</strong>. The reality is the <strong>Mnemonic (Seed Phrase)</strong> and <strong>Private Key</strong>.
+                                        </>
+                                    )}
+                                </p>
+                                <div className="bg-red-500/10 p-4 rounded-lg border border-red-500/20">
+                                    <h4 className="text-red-500 font-bold mb-2">⚠️ {isKo ? "절대 원칙" : "Golden Rule"}</h4>
+                                    <p className="text-sm text-gray-300">
+                                        {isKo ? (
+                                            <>
+                                                이 키를 가진 사람이 자산의 주인입니다. <br />
+                                                <strong>절대 누구에게도 보여주지 마세요.</strong> <br />
+                                                사진을 찍거나 클라우드에 올리지 말고, 종이에 적어 안전한 곳에 보관하세요.
+                                            </>
+                                        ) : (
+                                            <>
+                                                Whoever holds this key owns the assets. <br />
+                                                <strong>NEVER show this to anyone.</strong> <br />
+                                                Do not take photos or upload to the cloud. Write it on paper and store it safely.
+                                            </>
+                                        )}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* New Section: Creation Flow */}
+                    <div className="mb-12">
+                        <h3 className="text-2xl font-bold text-blue-400 mb-4">
+                            {isKo ? "지갑 생성 흐름: 단어에서 주소까지" : "Creation Flow: From Words to Address"}
+                        </h3>
+                        <p className="text-lg text-gray-300 mb-6">
+                            {isKo ? (
+                                <>
+                                    지갑이 어떻게 만들어지는지 이해하면 왜 니모닉 관리가 중요한지 알 수 있습니다. 모든 것은 <strong>니모닉(시드 문구)</strong>에서 시작됩니다.
+                                </>
+                            ) : (
+                                <>
+                                    Understanding how a wallet is created explains why managing your Mnemonic is crucial. Everything starts from the <strong>Mnemonic (Seed Phrase)</strong>.
+                                </>
+                            )}
+                        </p>
+
+                        <div className="mb-8">
+                            <WalletCreationFlowViz />
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="bg-white/5 p-5 rounded-xl border border-white/10">
+                                <h4 className="text-blue-400 font-bold mb-2">1. Mnemonic (Master Key)</h4>
+                                <p className="text-sm text-gray-400">
+                                    {isKo ?
+                                        "12개 또는 24개의 단어. 이것만 있으면 모든 지갑과 계정을 복구할 수 있는 마스터 키입니다." :
+                                        "12 or 24 words. This is the master key that can recover all your wallets and accounts."}
+                                </p>
+                            </div>
+                            <div className="bg-white/5 p-5 rounded-xl border border-white/10">
+                                <h4 className="text-amber-400 font-bold mb-2">2. Private Key (Sub Key)</h4>
+                                <p className="text-sm text-gray-400">
+                                    {isKo ?
+                                        "니모닉에서 파생된 특정 체인/계정의 비밀번호입니다. 니모닉이 있으면 언제든 다시 만들 수 있습니다." :
+                                        "The password for a specific chain/account derived from the Mnemonic. Can always be recreated if you have the Mnemonic."}
+                                </p>
+                            </div>
+                            <div className="bg-white/5 p-5 rounded-xl border border-white/10">
+                                <h4 className="text-purple-400 font-bold mb-2">3. Wallet App (Tool)</h4>
+                                <p className="text-sm text-gray-400">
+                                    {isKo ?
+                                        "키를 저장하고 서명하는 도구입니다. 앱을 삭제해도 키만 있으면 자산은 안전합니다." :
+                                        "A tool to store keys and sign transactions. Even if you delete the app, your assets are safe as long as you have the key."}
+                                </p>
+                            </div>
+                            <div className="bg-white/5 p-5 rounded-xl border border-white/10">
+                                <h4 className="text-emerald-400 font-bold mb-2">4. Address (Account)</h4>
+                                <p className="text-sm text-gray-400">
+                                    {isKo ?
+                                        "개인 키에서 생성된 공개 계좌 번호입니다. 남들에게 보여줘도 안전합니다." :
+                                        "The public account number generated from the Private Key. Safe to share with others."}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </>
             ),
         },

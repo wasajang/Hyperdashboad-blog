@@ -31,10 +31,92 @@ const connections = [
 ];
 
 export function ExchangeFlowViz() {
+    const [lines, setLines] = React.useState<{ id: string; path: string; opacity: number }[]>([]);
+    const nodeRefs = React.useRef<Map<string, HTMLAnchorElement>>(new Map());
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
     const getColumnNodes = (type: ExchangeNode['type']) => nodes.filter(n => n.type === type);
+
+    const updateLines = React.useCallback(() => {
+        if (!containerRef.current) return;
+
+        const newLines: { id: string; path: string; opacity: number }[] = [];
+        const containerRect = containerRef.current.getBoundingClientRect();
+
+        // Helper to get coordinates relative to the container
+        const getCoords = (id: string, side: 'left' | 'right') => {
+            const el = nodeRefs.current.get(id);
+            if (!el) return null;
+            const rect = el.getBoundingClientRect();
+            return {
+                x: (side === 'left' ? rect.left : rect.right) - containerRect.left,
+                y: rect.top + rect.height / 2 - containerRect.top
+            };
+        };
+
+        // 1. Bank -> Domestic (1:1)
+        connections.forEach(conn => {
+            const start = getCoords(conn.from, 'right');
+            const end = getCoords(conn.to, 'left');
+
+            if (start && end) {
+                const controlX = (start.x + end.x) / 2;
+                newLines.push({
+                    id: `${conn.from}-${conn.to}`,
+                    path: `M ${start.x} ${start.y} C ${controlX} ${start.y}, ${controlX} ${end.y}, ${end.x} ${end.y}`,
+                    opacity: 1
+                });
+            }
+        });
+
+
+
+        setLines(newLines);
+    }, []);
+
+    // Update lines on mount and resize
+    React.useLayoutEffect(() => {
+        // Initial update
+        updateLines();
+
+        // ResizeObserver for container
+        const resizeObserver = new ResizeObserver(() => {
+            updateLines();
+        });
+
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+
+        // Fallback window resize
+        window.addEventListener('resize', updateLines);
+
+        // Retry a few times to ensure refs are ready (handling hydration/animation delays)
+        const timers = [
+            setTimeout(updateLines, 100),
+            setTimeout(updateLines, 500),
+            setTimeout(updateLines, 1000)
+        ];
+
+        return () => {
+            resizeObserver.disconnect();
+            window.removeEventListener('resize', updateLines);
+            timers.forEach(t => clearTimeout(t));
+        };
+    }, [updateLines]);
 
     const NodeCard = ({ node }: { node: ExchangeNode }) => (
         <motion.a
+            ref={(el) => {
+                if (el) {
+                    nodeRefs.current.set(node.id, el);
+                    // Trigger update when a new ref is set (important for initial render)
+                    // We debounce this slightly to avoid excessive updates
+                    requestAnimationFrame(updateLines);
+                } else {
+                    nodeRefs.current.delete(node.id);
+                }
+            }}
             href={node.url}
             target={node.url ? "_blank" : undefined}
             rel="noopener noreferrer"
@@ -45,13 +127,14 @@ export function ExchangeFlowViz() {
                 shadow-[0_0_15px_rgba(0,0,0,0.5)]
                 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]
                 hover:scale-105
+                z-10
             `}
             style={{
                 borderColor: node.color,
                 boxShadow: `0 0 10px ${node.color}40`
             }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            // initial={{ opacity: 0, scale: 0.8 }} // Disabled for visibility debugging
+            // animate={{ opacity: 1, scale: 1 }}   // Disabled for visibility debugging
             whileHover={{
                 borderColor: '#ffffff',
                 boxShadow: `0 0 20px ${node.color}80`
@@ -82,7 +165,11 @@ export function ExchangeFlowViz() {
     );
 
     return (
-        <div className="relative w-full overflow-x-auto py-12 px-4 bg-cover rounded-xl border border-white/10" style={{ backgroundImage: `url('${ASSETS.TOKENOMICS.BACKGROUND}')` }}>
+        <div
+            ref={containerRef}
+            className="exchange-flow-container relative w-full overflow-x-auto py-12 px-4 bg-cover rounded-xl border border-white/10"
+            style={{ backgroundImage: `url('${ASSETS.TOKENOMICS.BACKGROUND}')` }}
+        >
             {/* Background Effects */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80 pointer-events-none" />
 
@@ -141,23 +228,18 @@ export function ExchangeFlowViz() {
                     </linearGradient>
                 </defs>
 
-                {/* 
-                    Simplified connections for MVP. 
-                    In a real app, we'd calculate positions dynamically.
-                    Here we use approximate relative paths.
-                */}
-                <path d="M 280 150 C 350 150, 350 150, 420 150" stroke="url(#gold-gradient)" strokeWidth="2" fill="none" filter="url(#glow)" />
-                <path d="M 280 250 C 350 250, 350 250, 420 250" stroke="url(#gold-gradient)" strokeWidth="2" fill="none" filter="url(#glow)" />
-                <path d="M 280 350 C 350 350, 350 350, 420 350" stroke="url(#gold-gradient)" strokeWidth="2" fill="none" filter="url(#glow)" />
-
-                <path d="M 550 150 C 620 150, 620 100, 690 100" stroke="url(#gold-gradient)" strokeWidth="1" fill="none" opacity="0.3" />
-                <path d="M 550 150 C 620 150, 620 200, 690 200" stroke="url(#gold-gradient)" strokeWidth="1" fill="none" opacity="0.3" />
-
-                <path d="M 550 250 C 620 250, 620 200, 690 200" stroke="url(#gold-gradient)" strokeWidth="1" fill="none" opacity="0.3" />
-                <path d="M 550 250 C 620 250, 620 300, 690 300" stroke="url(#gold-gradient)" strokeWidth="1" fill="none" opacity="0.3" />
-
-                <path d="M 550 350 C 620 350, 620 300, 690 300" stroke="url(#gold-gradient)" strokeWidth="1" fill="none" opacity="0.3" />
-                <path d="M 550 350 C 620 350, 620 400, 690 400" stroke="url(#gold-gradient)" strokeWidth="1" fill="none" opacity="0.3" />
+                {lines.map(line => (
+                    <path
+                        key={line.id}
+                        d={line.path}
+                        stroke="url(#gold-gradient)"
+                        strokeWidth={line.opacity === 1 ? 2 : 1}
+                        fill="none"
+                        filter={line.opacity === 1 ? "url(#glow)" : undefined}
+                        opacity={line.opacity}
+                        className="transition-all duration-500"
+                    />
+                ))}
             </svg>
         </div>
     );

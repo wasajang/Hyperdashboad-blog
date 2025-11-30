@@ -24,6 +24,16 @@ export default function GuidePage() {
         notFound();
     }
 
+    // Define the order of guides
+    const GUIDE_ORDER: GuideSlug[] = ['concept', 'exchange', 'wallet', 'transfer'];
+    const currentIndex = GUIDE_ORDER.indexOf(slug);
+
+    const prevSlug = currentIndex > 0 ? GUIDE_ORDER[currentIndex - 1] : null;
+    const nextSlug = currentIndex < GUIDE_ORDER.length - 1 ? GUIDE_ORDER[currentIndex + 1] : null;
+
+    const prevGuide = prevSlug ? guides[prevSlug] : null;
+    const nextGuide = nextSlug ? guides[nextSlug] : null;
+
     return (
         <div className="min-h-screen bg-black">
             <Section>
@@ -43,8 +53,46 @@ export default function GuidePage() {
                             </h1>
                         </div>
 
-                        <div className="prose prose-invert prose-lg max-w-none">
+                        <div className="prose prose-invert prose-lg max-w-none mb-16">
                             {guide.content}
+                        </div>
+
+                        {/* Navigation Buttons */}
+                        <div className="grid grid-cols-2 gap-4 mt-12 pt-8 border-t border-white/10">
+                            <div>
+                                {prevGuide && prevSlug ? (
+                                    <Link
+                                        href={`/onboarding/${prevSlug}`}
+                                        className="group block p-4 rounded-xl border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all"
+                                    >
+                                        <div className="text-sm text-gray-400 mb-1 group-hover:text-primary transition-colors">
+                                            ← {language === 'ko' ? "이전 단계" : "Previous Step"}
+                                        </div>
+                                        <div className="text-lg font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                                            {prevGuide.title}
+                                        </div>
+                                    </Link>
+                                ) : (
+                                    <div /> // Empty div to maintain grid layout if no prev link
+                                )}
+                            </div>
+                            <div className="text-right">
+                                {nextGuide && nextSlug ? (
+                                    <Link
+                                        href={`/onboarding/${nextSlug}`}
+                                        className="group block p-4 rounded-xl border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all"
+                                    >
+                                        <div className="text-sm text-gray-400 mb-1 group-hover:text-primary transition-colors">
+                                            {language === 'ko' ? "다음 단계" : "Next Step"} →
+                                        </div>
+                                        <div className="text-lg font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                                            {nextGuide.title}
+                                        </div>
+                                    </Link>
+                                ) : (
+                                    <div />
+                                )}
+                            </div>
                         </div>
                     </article>
                 </Container>
